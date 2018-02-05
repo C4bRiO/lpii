@@ -1,25 +1,22 @@
 package modelo;
 
 public abstract class Personas  {
-	Integer Id= 0;
-	String nombre = "";
-	Integer edad = 0;
+	private Integer Id= 0;
+	private String nombre = "";
+	private Integer edad = 0;
 	
-	
-	
+
 	public Personas() {
 		
 	}
 
-
 	public Personas(Integer id, String nombre, Integer edad) {
 		
-		this.Id = id;
-		this.nombre = nombre;
-		this.edad = edad;
+		this.Id 	= 	id		;
+		this.nombre = 	nombre	;
+		this.edad 	= 	edad	;
 	}
 
-	
 	@Override
 	public String toString() {
 		return  "Personas [Id_persona=" + Id + ", nombre=" + nombre + ", edad=" + edad + "]";
