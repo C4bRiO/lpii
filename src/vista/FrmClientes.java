@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrmClientes extends JFrame {
 
@@ -26,7 +28,7 @@ public class FrmClientes extends JFrame {
 	private JTextField txtCi;
 	private JTextField txtNombre;
 	private JTextField txtEdad;
-	private JTextField textField;
+	private JTextField txtDeuda;
 
 	/**
 	 * Launch the application.
@@ -122,6 +124,21 @@ public class FrmClientes extends JFrame {
 		panel_2.add(lblEdad);
 		
 		txtEdad = new JTextField();
+		
+		txtEdad.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			       char caracter = e.getKeyChar();
+
+			   // Verificar si la tecla pulsada no es un digito
+				if(((caracter < '0') ||
+				    (caracter > '9')) &&
+				    (caracter != '\b' /*corresponde a BACK_SPACE*/))
+				    {
+				    	e.consume();  // ignorar el evento de teclado
+				    }
+			}
+		});
 		txtEdad.setColumns(10);
 		txtEdad.setBounds(10, 260, 200, 20);
 		panel_2.add(txtEdad);
@@ -130,17 +147,20 @@ public class FrmClientes extends JFrame {
 		lblDeuda.setBounds(10, 310, 46, 14);
 		panel_2.add(lblDeuda);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(10, 330, 200, 20);
-		panel_2.add(textField);
+		txtDeuda = new JTextField();
+		txtDeuda.setColumns(10);
+		txtDeuda.setBounds(10, 330, 200, 20);
+		panel_2.add(txtDeuda);
 		
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null, "testing, it works!");
-				
+				//JOptionPane.showMessageDialog(null, "testing, it works!");
+				String  ci 		= txtCi.getText();
+				String  nombre 	= txtNombre.getText();
+				Integer edad	= Integer.parseInt( txtEdad.getText() );
+				String  deuda 	= txtDeuda.getText();
 				
 			}
 		});
