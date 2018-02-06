@@ -7,9 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.TableHeaderUI;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,12 +23,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ListSelectionModel;
+import java.awt.Rectangle;
+import java.awt.Font;
 
 public class FrmClientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblClientes;
-	private JTextField txtId;
 	private JTextField txtCi;
 	private JTextField txtNombre;
 	private JTextField txtEdad;
@@ -74,7 +80,13 @@ public class FrmClientes extends JFrame {
 		panel_1.setLayout(null);
 		
 		tblClientes = new JTable();
-		tblClientes.setForeground(Color.LIGHT_GRAY);
+		tblClientes.setGridColor(Color.BLACK);
+		tblClientes.setFont(new Font("Dialog", Font.PLAIN, 12));
+		tblClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tblClientes.setFillsViewportHeight(true);
+		tblClientes.setCellSelectionEnabled(true);
+		tblClientes.setColumnSelectionAllowed(true);
+		tblClientes.setForeground(Color.BLACK);
 		tblClientes.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -95,11 +107,6 @@ public class FrmClientes extends JFrame {
 		JLabel lblId = new JLabel("Id");
 		lblId.setBounds(10, 30, 46, 14);
 		panel_2.add(lblId);
-		
-		txtId = new JTextField();
-		txtId.setBounds(10, 50, 200, 20);
-		panel_2.add(txtId);
-		txtId.setColumns(10);
 		
 		JLabel lblCi = new JLabel("CI");
 		lblCi.setBounds(10, 100, 46, 14);
@@ -162,6 +169,25 @@ public class FrmClientes extends JFrame {
 				Integer edad	= Integer.parseInt( txtEdad.getText() );
 				String  deuda 	= txtDeuda.getText();
 				
+				
+				
+				DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+				
+				
+				Object fila[] = new Object[4];
+				
+				fila[0] = ci;
+				fila[1] = nombre;
+				fila[2] = edad;
+				fila[3] = deuda;
+				
+				modelo.addRow(fila);
+				
+				
+				
+				
+				tblClientes.setTableHeader(null);
+				tblClientes.setModel(modelo);
 			}
 		});
 		btnAgregar.setBounds(121, 380, 89, 23);
