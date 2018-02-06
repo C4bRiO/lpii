@@ -4,12 +4,12 @@ public class Clientes extends Personas{
 	private Integer deuda;
 	
 
-	public Clientes() {
-		//super(); Opcional, queda implícito
+	public Clientes(){
+		super();
 	}
 
-	public Clientes(Integer id, String nombre, Integer edad,Integer deuda) {
-		super(id, nombre, edad);
+	public Clientes(Integer id, Integer ci, Integer edad, String nombre,Integer deuda) {
+		super(id, ci, edad, nombre);
 		this.deuda = deuda;
 	}
 
